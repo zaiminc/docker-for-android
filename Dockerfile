@@ -18,6 +18,12 @@ ENV ANDROID_HOME /usr/local/android-sdk-linux
 ENV ANDROID_SDK /usr/local/android-sdk-linux
 ENV PATH ${ANDROID_HOME}/tools:$ANDROID_HOME/platform-tools:$PATH
 
+# Download and unzip NDK
+ENV ANDROID_NDK_URL http://dl.google.com/android/repository/android-ndk-r10d-linux-x86_64.zip
+RUN curl -L "${ANDROID_NDK_URL}" | unzip /usr/local
+ENV ANDROID_NDK_HOME /usr/local/android-ndk-r10d
+ENV PATH ${ANDROID_NDK_HOME}:$PATH
+
 # Install Android SDK components
 # License Id: android-sdk-license-ed0d0a5b
 ENV ANDROID_COMPONENTS platform-tools,build-tools-23.0.3,android-23
