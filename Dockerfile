@@ -18,9 +18,12 @@ ENV ANDROID_HOME /usr/local/android-sdk-linux
 ENV ANDROID_SDK /usr/local/android-sdk-linux
 ENV PATH ${ANDROID_HOME}/tools:$ANDROID_HOME/platform-tools:$PATH
 
-# Download and unzip NDK
-ENV ANDROID_NDK_URL http://dl.google.com/android/repository/android-ndk-r10d-linux-x86_64.zip
-RUN curl -L "${ANDROID_NDK_URL}" | unzip /usr/local
+# Download and execute NDK
+ENV ANDROID_NDK_URL https://dl.google.com/android/ndk/android-ndk-r10d-linux-x86_64.bin
+RUN wget "${ANDROID_NDK_URL}"
+RUN chmod a+x android-ndk-r10d-linux-x86_64.bin
+RUN ./android-ndk-r10d-linux-x86_64.bin
+RUN mv ./android-ndk-r10d /usr/local/android-ndk-r10d
 ENV ANDROID_NDK_HOME /usr/local/android-ndk-r10d
 ENV PATH ${ANDROID_NDK_HOME}:$PATH
 
