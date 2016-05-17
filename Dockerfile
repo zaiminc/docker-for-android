@@ -31,7 +31,7 @@ ENV PATH ${ANDROID_NDK_HOME}:$PATH
 
 # Install Android SDK components
 # License Id: android-sdk-license-ed0d0a5b
-ENV ANDROID_COMPONENTS platform-tools,build-tools-23.0.3,android-23
+ENV ANDROID_COMPONENTS platform-tools,build-tools-23.0.3,android-23,sys-img-armeabi-v7a-android-23
 # License Id: android-sdk-license-5be86d5
 ENV GOOGLE_COMPONENTS extra-android-m2repository,extra-google-m2repository
 
