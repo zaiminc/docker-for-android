@@ -28,6 +28,7 @@ RUN ./${ANDROID_NDK_DIR}-linux-x86_64.bin
 RUN mv ./${ANDROID_NDK_DIR} /usr/local/${ANDROID_NDK_DIR}
 ENV ANDROID_NDK_HOME /usr/local/${ANDROID_NDK_DIR}
 ENV PATH ${ANDROID_NDK_HOME}:$PATH
+RUN rm -f ${ANDROID_NDK_DIR}-linux-x86_64.bin
 
 # Install Android SDK components
 # License Id: android-sdk-license-ed0d0a5b
