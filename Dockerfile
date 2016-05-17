@@ -9,6 +9,7 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN dpkg --add-architecture i386 && \
     apt-get update && \
     apt-get install -yq libc6:i386 libstdc++6:i386 zlib1g:i386 libncurses5:i386 --no-install-recommends && \
+    apt-get install -yq build-essential libtool && \
     apt-get clean
 
 # Download and untar SDK
@@ -19,12 +20,13 @@ ENV ANDROID_SDK /usr/local/android-sdk-linux
 ENV PATH ${ANDROID_HOME}/tools:$ANDROID_HOME/platform-tools:$PATH
 
 # Download and execute NDK
-ENV ANDROID_NDK_URL https://dl.google.com/android/ndk/android-ndk-r10d-linux-x86_64.bin
+ENV ANDROID_NDK_DIR android-ndk-r10d
+ENV ANDROID_NDK_URL https://dl.google.com/android/ndk/${ANDROID_NDK_DIR}-linux-x86_64.bin
 RUN wget "${ANDROID_NDK_URL}"
-RUN chmod a+x android-ndk-r10d-linux-x86_64.bin
-RUN ./android-ndk-r10d-linux-x86_64.bin
-RUN mv ./android-ndk-r10d /usr/local/android-ndk-r10d
-ENV ANDROID_NDK_HOME /usr/local/android-ndk-r10d
+RUN chmod a+x ${ANDROID_NDK_DIR}-linux-x86_64.bin
+RUN ./${ANDROID_NDK_DIR}-linux-x86_64.bin
+RUN mv ./${ANDROID_NDK_DIR} /usr/local/${ANDROID_NDK_DIR}
+ENV ANDROID_NDK_HOME /usr/local/${ANDROID_NDK_DIR}
 ENV PATH ${ANDROID_NDK_HOME}:$PATH
 
 # Install Android SDK components
