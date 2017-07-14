@@ -1,7 +1,7 @@
 # based on https://github.com/gfx/docker-android-project/blob/master/Dockerfile
 FROM java:8
 
-MAINTAINER Takahiro Shimokawa <takahiro.1828@gmail.com>
+MAINTAINER napplecomputer <suwamura.natsuhiko@zaim.co.jp>
 
 ENV DEBIAN_FRONTEND noninteractive
 
@@ -12,21 +12,26 @@ RUN dpkg --add-architecture i386 && \
     apt-get install -yq build-essential libtool && \
     apt-get clean
 
-# Download and untar SDK
-ENV ANDROID_SDK_URL http://dl.google.com/android/android-sdk_r24.4.1-linux.tgz
-RUN curl -L "${ANDROID_SDK_URL}" | tar --no-same-owner -xz -C /usr/local
-ENV ANDROID_HOME /usr/local/android-sdk-linux
-ENV ANDROID_SDK /usr/local/android-sdk-linux
+ENV ANDROID_HOME /usr/local/
 ENV PATH ${ANDROID_HOME}/tools:$ANDROID_HOME/platform-tools:$PATH
 
-# Install Android SDK components
-# License Id: android-sdk-license-ed0d0a5b
-ENV ANDROID_COMPONENTS platform-tools,build-tools-23.0.3,android-23,sys-img-armeabi-v7a-android-23
-# License Id: android-sdk-license-5be86d5
-ENV GOOGLE_COMPONENTS extra-android-m2repository,extra-google-m2repository
+RUN cd /usr/local/ && \
+curl -L -O https://dl.google.com/android/repository/sdk-tools-linux-3859397.zip && \
+unzip sdk-tools-linux-3859397.zip && \
+/usr/local/tools/bin/sdkmanager --update && yes | /usr/local/tools/bin/sdkmanager --licenses && \
+/usr/local/tools/bin/sdkmanager "platform-tools" && \
+/usr/local/tools/bin/sdkmanager "build-tools;25.0.2" && \
+/usr/local/tools/bin/sdkmanager "platforms;android-25" && \
+/usr/local/tools/bin/sdkmanager "extras;android;m2repository" && \
+/usr/local/tools/bin/sdkmanager "extras;google;m2repository" && \
+/usr/local/tools/bin/sdkmanager "extras;google;google_play_services" && \
+/usr/local/tools/bin/sdkmanager "extras;m2repository;com;android;support;constraint;constraint-layout-solver;1.0.2" && \
+/usr/local/tools/bin/sdkmanager "extras;m2repository;com;android;support;constraint;constraint-layout;1.0.2" && \
+/usr/local/tools/bin/sdkmanager "system-images;android-25;google_apis;armeabi-v7a" && \
+rm -rf /usr/local/sdk-tools-linux-3859397.zip
 
-RUN echo y | android update sdk --no-ui --all --filter "${ANDROID_COMPONENTS}" ; \
-    echo y | android update sdk --no-ui --all --filter "${GOOGLE_COMPONENTS}"
+# Create AVD
+echo no | /usr/local/tools/bin/avdmanager create avd --force -n test --abi google_apis/armeabi-v7a --package "system-images;android-25;google_apis;armeabi-v7a"
 
 # Support Gradle
 ENV TERM dumb
