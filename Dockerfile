@@ -31,7 +31,7 @@ unzip sdk-tools-linux-3859397.zip && \
 rm -rf /usr/local/sdk-tools-linux-3859397.zip
 
 # Create AVD
-echo no | /usr/local/tools/bin/avdmanager create avd --force -n test --abi google_apis/armeabi-v7a --package "system-images;android-25;google_apis;armeabi-v7a"
+RUN echo no | /usr/local/tools/bin/avdmanager create avd --force -n test --abi google_apis/armeabi-v7a --package "system-images;android-25;google_apis;armeabi-v7a"
 
 # Support Gradle
 ENV TERM dumb
