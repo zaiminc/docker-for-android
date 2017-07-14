@@ -28,6 +28,7 @@ unzip sdk-tools-linux-3859397.zip && \
 /usr/local/tools/bin/sdkmanager "extras;m2repository;com;android;support;constraint;constraint-layout-solver;1.0.2" && \
 /usr/local/tools/bin/sdkmanager "extras;m2repository;com;android;support;constraint;constraint-layout;1.0.2" && \
 /usr/local/tools/bin/sdkmanager "system-images;android-25;google_apis;armeabi-v7a" && \
+/usr/local/tools/bin/sdkmanager "emulator" && \
 rm -rf /usr/local/sdk-tools-linux-3859397.zip
 
 # Create AVD
