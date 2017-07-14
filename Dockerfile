@@ -12,7 +12,7 @@ RUN dpkg --add-architecture i386 && \
     apt-get install -yq build-essential libtool && \
     apt-get clean
 
-ENV ANDROID_HOME /usr/local/
+ENV ANDROID_HOME /usr/local
 ENV PATH ${ANDROID_HOME}/tools:$ANDROID_HOME/platform-tools:$PATH
 
 RUN cd /usr/local/ && \
