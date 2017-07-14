@@ -19,17 +19,6 @@ ENV ANDROID_HOME /usr/local/android-sdk-linux
 ENV ANDROID_SDK /usr/local/android-sdk-linux
 ENV PATH ${ANDROID_HOME}/tools:$ANDROID_HOME/platform-tools:$PATH
 
-# Download and execute NDK
-ENV ANDROID_NDK_DIR android-ndk-r10d
-ENV ANDROID_NDK_URL https://dl.google.com/android/ndk/${ANDROID_NDK_DIR}-linux-x86_64.bin
-RUN wget "${ANDROID_NDK_URL}"
-RUN chmod a+x ${ANDROID_NDK_DIR}-linux-x86_64.bin
-RUN ./${ANDROID_NDK_DIR}-linux-x86_64.bin
-RUN mv ./${ANDROID_NDK_DIR} /usr/local/${ANDROID_NDK_DIR}
-ENV ANDROID_NDK_HOME /usr/local/${ANDROID_NDK_DIR}
-ENV PATH ${ANDROID_NDK_HOME}:$PATH
-RUN rm -f ${ANDROID_NDK_DIR}-linux-x86_64.bin
-
 # Install Android SDK components
 # License Id: android-sdk-license-ed0d0a5b
 ENV ANDROID_COMPONENTS platform-tools,build-tools-23.0.3,android-23,sys-img-armeabi-v7a-android-23
