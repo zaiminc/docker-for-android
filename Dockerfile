@@ -20,8 +20,8 @@ curl -L -O https://dl.google.com/android/repository/sdk-tools-linux-3859397.zip 
 unzip sdk-tools-linux-3859397.zip && \
 /usr/local/tools/bin/sdkmanager --update && yes | /usr/local/tools/bin/sdkmanager --licenses && \
 /usr/local/tools/bin/sdkmanager "platform-tools" && \
-/usr/local/tools/bin/sdkmanager "build-tools;25.0.2" && \
-/usr/local/tools/bin/sdkmanager "platforms;android-25" && \
+/usr/local/tools/bin/sdkmanager "build-tools;26.0.1" && \
+/usr/local/tools/bin/sdkmanager "platforms;android-26" && \
 /usr/local/tools/bin/sdkmanager "extras;android;m2repository" && \
 /usr/local/tools/bin/sdkmanager "extras;google;m2repository" && \
 /usr/local/tools/bin/sdkmanager "extras;google;google_play_services" && \
